@@ -9,6 +9,10 @@ func canConstruct(ransomNote string, magazine string) bool {
 		words[string(v)]++
 	}
 
+	/*
+	只要檢測ransomNote字元出現字數超過magazine，表示ransomNote不能構成magazine。
+	即便magazine有的字元在ransomNote沒有出現也無所謂
+	*/
 	for _, v := range ransomNote {
 		if words[string(v)] == 0 {
 			return false
