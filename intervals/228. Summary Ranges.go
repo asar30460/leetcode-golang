@@ -6,7 +6,7 @@ import (
 
 // 本題用sliding window解，並設定k為搜尋區間
 func summaryRanges(nums []int) []string {
-    var res []string
+	var res []string
 
 	for i := 0; i < len(nums); i++ {
 		j := i
