@@ -1,4 +1,4 @@
-package main
+package Stack
 
 import (
 	"fmt"
@@ -25,13 +25,4 @@ func (e *EzStack) push(val byte) {
 
 func (e *EzStack) pop() {
 	e.top--
-}
-
-func main() {
-	var parenthesesStack = newStack(10)
-	parenthesesStack.push(byte('a'))
-	parenthesesStack.push(byte('b'))
-	parenthesesStack.push(byte('c'))
-	parenthesesStack.pop()
-	fmt.Println(string(parenthesesStack.data[parenthesesStack.top]))
 }
