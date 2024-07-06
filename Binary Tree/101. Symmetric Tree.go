@@ -18,7 +18,7 @@ func dfs(left *TreeNode, right *TreeNode) bool {
 		return true
 	}
 
-	// 上個判斷式已處理兩個都是nil情況，所以此判斷式成立表示騎一不為nil
+	// 上個判斷式已處理兩個都是nil情況，所以此判斷式成立表示其一不為nil
 	if left == nil || right == nil {
 		return false
 	}
