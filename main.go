@@ -2,54 +2,51 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
-func threeSum(nums []int) [][]int {
-	sort.Ints(nums)
-	var res [][]int
+/*
+ * P   A   H   N
+ * A P L S I I G
+ * Y   I   R
+ *
+ * 這個拉鍊是一個規律，每輪都是先往下到底再往上，如此循環
+ * 因此只要處理這兩種情況就行
+ */
+ func convert(s string, numRows int) string {
+	if numRows == 1 || numRows > len(s) {
+		return s
+	}
 
-	for i := 0; i < len(nums)-2; i++ {
-		// 若出現連續相同target，直接跳過本次迭代
-		if i != 0 && nums[i] == nums[i-1] {
-			continue
+    stringBuilder := make([]string, numRows) // 建立列陣列
+
+	i := 0 
+	for _, v := range s {
+		// 完成循環一輪，重新歸零
+		if i == 2 * numRows - 2 {
+			i = 0
 		}
 
-		/* 以下判斷就剩下「2sums == -nums[i]?...等式(一)」，用左右指標往內夾搜尋
-		 * 而nums是排序過的，2sums < -nums[i]時，增加left，同理，2sums > -nums[i]時，減少right
-		 * 此外我們一樣不希望2sums也出現重複組合
-		 * 所以我們要確認在左右指標有更動過（非第一次迭帶），判斷是否與上一次的結果重複，如是，就跳過本次迭代
-		*/
-		left, right := i+1, len(nums)-1
-		for left < right {
-			if left != i+1 && nums[left] == nums[left-1] {
-				left++
-				continue
-			}
-
-			if right != len(nums)-1 && nums[right] == nums[right+1] {
-				right--
-				continue
-			}
-
-			if nums[left]+nums[right] == -nums[i] {
-				res = append(res, []int{nums[i], nums[left], nums[right]})
-			}
-
-			if nums[left]+nums[right] < -nums[i] {
-				left++
-			} else {
-				right--
-			}
+		if i < numRows {	// 處理往下情況
+			stringBuilder[i] += string(v)
+		} else {	// 處理往上情況
+			stringBuilder[2 * numRows - 2 - i] += string(v)
 		}
+
+		i++
+	}
+
+	res := ""
+	for i := range stringBuilder {
+		res += stringBuilder[i]
 	}
 
 	return res
-}
+ }
 
 func main() {
-	fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
-	fmt.Println(threeSum([]int{0, 1, 1}))
-	fmt.Println(threeSum([]int{0, 0, 0}))
-	fmt.Println(threeSum([]int{0, 0, 0, 0}))
+	fmt.Println(convert("PAYPALISHIRING", 3))
+	fmt.Println(convert("PAYPALISHIRING", 4))
+	fmt.Println(convert("PAYPALISHIRING", 2))
+	fmt.Println(convert("A", 1))
+	fmt.Println(convert("AB", 1))
 }
