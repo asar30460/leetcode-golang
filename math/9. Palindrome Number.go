@@ -15,6 +15,7 @@ func isPalindrome(x int) bool {
 		numArr = append(numArr, x%10)
 		x /= 10
 	}
+	// fmt.Println(numArr)
 
 	left, right := 0, len(numArr)-1
 
@@ -34,4 +35,5 @@ func main() {
 	fmt.Printf("Case 1: %v\n", isPalindrome(121))
 	fmt.Printf("Case 2: %v\n", isPalindrome(-121))
 	fmt.Printf("Case 3: %v\n", isPalindrome(10))
+	fmt.Printf("Case 4: %v\n", isPalindrome(3456))
 }
